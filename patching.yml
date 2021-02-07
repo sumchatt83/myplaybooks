@@ -1,0 +1,43 @@
+---
+ - hosts: Test
+   become: true
+   become_user: root
+   tasks:
+    
+     - name: Check current kernel
+       shell: uname -r
+       register: curr_version
+       check_mode: yes
+     
+     - debug: msg="The current version of kernel is {{ curr_version.stdout }}"
+
+     - name: Updating kernel 
+       yum:
+          name=kernel
+          state=latest
+       register: updated_kernel
+       check_mode: yes
+     
+     - debug: msg="Kernel is updated to latest version"
+       when: updated_kernel.rc==0
+ 
+     - name: reboot server after upgrade
+       command: reboot
+       async: 1
+       poll: 0
+       check_mode: yes
+ 
+     - name: waiting for system to come up
+       pause:
+          minutes: 1
+       check_mode: yes
+     
+     - name: check if krnel is updated
+       command: uname -r
+       register: updated_ker
+       check_mode: yes
+
+     - debug: msg="kernel is updated {{ updated_ker.stdout }}"
+       when: updated_ker != curr_version
+       check_mode: yes
+       
