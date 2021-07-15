@@ -1,0 +1,8 @@
+---
+ - hosts: Test
+   become: true
+   become_user: root
+   tasks:
+     - name: Execute a pre-patch script
+       shell: cd /tmp ; ./myscript.sh > $(hostname).$(date +"%d:%m:%Y")      
+        

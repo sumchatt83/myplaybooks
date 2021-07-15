@@ -1,0 +1,29 @@
+---
+- hosts: Test
+  become: true
+  become_user: root
+  tasks:
+   - name: Copy file 
+     copy:
+      src: /home/schatt/betu.txt
+      dest: /tmp/
+      mode: 0755
+      owner: root
+      group: schatt
+   
+   - name: Add content to file 
+     blockinfile:
+        path: /tmp/betu.txt
+        block: 
+           This is AWS Ansible Tower user file.
+        state: present
+   
+   - name: Check the content of file
+     command: cat /tmp/betu.txt
+     register: output
+     
+   - debug: msg="please find results {{ output.stdout }}" 
+      
+
+          
+    

@@ -1,0 +1,7 @@
+---
+ - hosts: Test
+   become: true
+   become_user: root
+   roles:
+     - apache
+  

@@ -1,0 +1,42 @@
+---
+ - hosts: all
+   become: true
+   tasks:
+    
+     - name: Stop httpd Service 
+       service:
+           name: httpd
+           state: stopped
+       ignore_errors: true
+    
+     - name: Uninstall httpd
+       yum: 
+          name: httpd
+          state: absent
+       ignore_errors: true
+
+     - name: Stop vsftpd Service 
+       service:
+           name: vsftpd
+           state: stopped
+       ignore_errors: true
+    
+     - name: Uninstall vsftpd
+       yum: 
+          name: vsftpd
+          state: absent
+       ignore_errors: true
+
+
+     - name: Stop nfs Service 
+       service:
+           name: nfs-server
+           state: stopped
+       ignore_errors: true
+    
+     - name: Uninstall nfs
+       yum: 
+          name: nfs-server
+          state: absent
+       ignore_errors: true
+

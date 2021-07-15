@@ -1,0 +1,18 @@
+---
+ - hosts: Test
+   become: true
+   become_user: root
+   tasks:
+     - name: Checking Services 
+       yum:
+          name: "{{ item }}"
+          state: present
+       ignore_errors: true
+       loop:   
+        - httpd
+        - vsftpd
+        - postfix
+        - nfs-utils
+
+
+
