@@ -1,0 +1,10 @@
+---
+ - hosts: Test
+   become: true
+   tasks:
+    - name: Install Multiple Packages
+      yum:
+          name: ['vsftpd', 'httpd', 'nfs-utils' , 'postfix']
+          state: present
+          
+            

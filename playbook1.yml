@@ -7,21 +7,25 @@
        service:
            name: httpd
            state: stopped
+       ignore_errors: true
     
      - name: Uninstall httpd
        yum: 
           name: httpd
           state: absent
+       ignore_errors: true
 
      - name: Stop vsftpd Service 
        service:
            name: vsftpd
            state: stopped
+       ignore_errors: true
     
      - name: Uninstall vsftpd
        yum: 
           name: vsftpd
           state: absent
+       ignore_errors: true
 
 
      - name: Stop nfs Service 

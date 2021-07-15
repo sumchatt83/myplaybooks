@@ -1,0 +1,23 @@
+---
+ - hosts: Test
+   become: true
+   become_user: root
+   tasks:
+     - name: start apache 
+       service:
+           name: httpd
+           state: started
+    
+     - name: start nfs
+       service:
+           name: nfs
+           state: started
+       ignore_errors: true
+
+     - name: start ftp
+       service:
+           name: vsftpd
+           state: started
+
+
+

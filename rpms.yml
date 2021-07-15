@@ -1,0 +1,16 @@
+---
+ - hosts: Test
+   become: true
+   become_user: root
+   tasks:
+     - name: Cheking packages on remote hosts
+       shell: rpm -qa | grep -i httpd ; rpm -qa | grep -i nfs-utils ; rpm -qa | grep -i vsftpd
+       register: packages
+
+     - debug:
+         msg: "{{ packages.stdout }}"
+
+       
+
+
+
