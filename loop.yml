@@ -1,0 +1,27 @@
+---
+ - hosts: all
+   become: true
+   become_user: root
+   tasks:
+     
+
+     - name: Stopping Services
+       service:
+         name: "{{ item }}"
+         state: stopped
+       ignore_errors: true
+       loop:
+         - httpd
+         - vsftpd
+         - nfs-utils
+      
+     - name: Uinstalling Services
+       yum:
+         name: "{{ item }}"
+         state: absent
+       ignore_errors: true
+       loop:
+         - httpd
+         - vsftpd
+         - nfs-utils
+             

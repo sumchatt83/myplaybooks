@@ -1,0 +1,17 @@
+---
+ - hosts: Test
+   become: true
+   become_user: root
+   tasks:
+     - name: Installing Package
+       yum:
+          name: httpd
+          state: latest
+         
+     - name: Stop a Service
+       service:
+          name: httpd
+          state: stopped
+   
+   
+

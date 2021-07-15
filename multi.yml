@@ -1,0 +1,6 @@
+
+   - name: Stop Services
+     import_playbook: remove2.yml
+   
+   - name: Uinstall packages
+     import_playbook: playbook1.yml

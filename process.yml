@@ -1,0 +1,21 @@
+---
+ - hosts: Test
+   become: true
+   tasks: 
+     - name: Check Apache 
+       shell: systemctl status httpd 
+       register: apache_check
+       ignore_errors: true
+       
+     - debug: 
+           msg: "Apache Status is {{ apache_check.stdout }}"
+
+     - name: Start Apache
+       shell: systemctl start httpd
+       when: ansible_os_family == "RedHat" && ansible_distribution_major_version == "7.9" 
+       
+
+
+      
+
+         

@@ -1,0 +1,30 @@
+---
+ - hosts: all
+   become: true
+   become_user: root
+   tasks: 
+         
+         - name: check if process has been stopped 
+           shell: if ps -eaf | grep -i httpd  
+           register: process_check
+        
+         - debug: msg="{{ process_check.stdout }}"  
+        
+         - name: chek condition before reboot 
+           when: process_check.rc == 0
+           command: shutdown -r now
+           async: 1
+           poll: 0
+         
+         - name: wait for system to boot
+           pause:
+              minutes: 1
+         
+         - name: check if system has been booted
+           shell: uptime
+           register: system_is_booted
+         
+         - debug: msg="Sytem has been rebooted {{ system_is_booted.stdout }}"
+
+      
+    

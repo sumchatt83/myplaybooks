@@ -1,0 +1,12 @@
+---
+ - hosts: all
+   become: true
+   tasks:
+    - name: Print Messgaes
+      debug:
+          msg: "{{ item }}"
+      with_items:
+          - "Hello Chatterjee"
+          - "Welcome to Ansible Module"
+      when: ansible_distribution == "Ubuntu" 
+      
